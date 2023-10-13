@@ -36,6 +36,10 @@ def insert_new(parameters):
     conn.commit()
 
 
+def check_user():
+    c.execute('''SELECT * FROM tanklogin WHERE EXISTS (SELECT username FROM tanklogin WHERE username = usern''')
+
+
 def show_table():
     c.execute('SELECT * FROM tanklogin')
     df = pd.DataFrame(c.fetchall(), columns=['user_id', 'firstname', 'lastname', 'username', 'password'])
