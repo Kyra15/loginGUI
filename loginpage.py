@@ -1,6 +1,15 @@
-from tkinter import *
+import tkinter as tk
+import customtkinter as ctk
+import main as m
 
-window = Tk()
-window.geometry("960x640")
-window.title("Login or Create a New Account")
-window.mainloop()
+ctk.set_appearance_mode("dark")
+
+ctk.set_default_color_theme("blue")
+
+root_tk = tk.Tk()
+root_tk.geometry("960x640")
+root_tk.title("Login Page")
+
+
+
+root_tk.mainloop()
