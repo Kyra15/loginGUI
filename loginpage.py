@@ -10,6 +10,4 @@ root_tk = tk.Tk()
 root_tk.geometry("960x640")
 root_tk.title("Login Page")
 
-
-
 root_tk.mainloop()
