@@ -25,12 +25,12 @@ def create_table():
 def delete_table():
     c.execute("DROP TABLE tanklogin")
 
-# returns list of the first name and last name of person with the given username
+# returns list of the first name and last name of the person who is currently logged in
 def get_current_user_name():
     c.execute('SELECT firstname, lastname FROM tanklogin WHERE username = ?', (CurrentLoggedInUser,))
     return list(c.fetchone())
 
-# inserts a new row given a list of parameters
+# inserts a new row given a list of parameters (first name, last name, username, and password)
 def insert_new(parameters):
     c.execute('INSERT INTO tanklogin (firstname, lastname, username, password) VALUES (?, ?, ?, ?)', tuple(parameters))
     conn.commit()
