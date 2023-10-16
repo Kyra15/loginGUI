@@ -1,11 +1,7 @@
 import sqlite3
 import pandas as pd
-from cryptography.fernet import Fernet
-
-key = Fernet.generate_key()
-
-fernet = Fernet(key)
-
+import tkinter.messagebox as tkmb
+from loginpage import root
 
 conn = sqlite3.connect('test_database')
 c = conn.cursor()
@@ -45,6 +41,30 @@ def insert_new(parameters):
 def check_user(user):
     c.execute("SELECT password FROM tanklogin WHERE username = ?", (str(user),))
     return c.fetchone()
+
+def signup(param):
+    dbpass = check_user(param[2])
+    if dbpass == None:
+        insert_new(param)
+        tkmb.showinfo(title="Signup Successful", message="You have signed up successfully")
+        root.destroy()
+        with open("mainpage.py") as f:
+            exec(f.read())
+    else:
+        tkmb.showwarning("Invalid username", "That username is already taken, please choose a new one")
+
+
+def login(param):
+    dbpass = check_user(param[2])
+    if dbpass == None:
+        tkmb.showwarning(title="Account not found",message="That username was not found.")
+    if hash(param[3]) == dbpass:
+        tkmb.showinfo(title="Login Successful",message="You have logged in successfully")
+        root.destroy()
+        with open("mainpage.py") as f:
+            exec(f.read())
+    elif hash(param[3]) != dbpass:
+        tkmb.showwarning(title='Wrong password',message='Please check your password')
 
 
 # def check_pswd(user, psswd):
