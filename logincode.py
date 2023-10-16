@@ -1,7 +1,6 @@
 import sqlite3
 import pandas as pd
 import tkinter.messagebox as tkmb
-from loginpage import root
 
 conn = sqlite3.connect('test_database')
 c = conn.cursor()
@@ -47,7 +46,7 @@ def signup(param):
     if dbpass == None:
         insert_new(param)
         tkmb.showinfo(title="Signup Successful", message="You have signed up successfully")
-        root.destroy()
+        # root.destroy()
         with open("mainpage.py") as f:
             exec(f.read())
     else:
@@ -55,12 +54,15 @@ def signup(param):
 
 
 def login(param):
+    print(param)
     dbpass = check_user(param[2])
+    print(hash(param[3]))
+    print(dbpass)
     if dbpass == None:
         tkmb.showwarning(title="Account not found",message="That username was not found.")
     if hash(param[3]) == dbpass:
         tkmb.showinfo(title="Login Successful",message="You have logged in successfully")
-        root.destroy()
+        # root.destroy()
         with open("mainpage.py") as f:
             exec(f.read())
     elif hash(param[3]) != dbpass:

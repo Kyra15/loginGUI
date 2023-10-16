@@ -41,12 +41,17 @@ user_entry.pack(pady=12,padx=10)
 user_pass= ctk.CTkEntry(master=frame2,placeholder_text="Password",show="*")
 user_pass.pack(pady=12,padx=10)
 
+print(firstname.get())
+print(lastname.get())
+print(user_entry.get())
+print(user_pass.get())
+
 params = (firstname.get(), lastname.get(), user_entry.get(), user_pass.get())
 
-button1 = ctk.CTkButton(master=frame1,text='Login',command=lambda: login(params))
+button1 = ctk.CTkButton(master=frame1,text='Login',command=lambda:login(params))
 button1.pack(pady=12,padx=10)
 
-button2 = ctk.CTkButton(master=frame2,text='Sign Up',command=lambda: signup(params))
+button2 = ctk.CTkButton(master=frame2,text='Sign Up',command=lambda:signup(params))
 button2.pack(pady=12,padx=10)
 
 root.mainloop()
