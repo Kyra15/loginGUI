@@ -1,5 +1,11 @@
 import sqlite3
 import pandas as pd
+from cryptography.fernet import Fernet
+
+key = Fernet.generate_key()
+
+fernet = Fernet(key)
+
 
 conn = sqlite3.connect('test_database')
 c = conn.cursor()
@@ -36,8 +42,18 @@ def insert_new(parameters):
     conn.commit()
 
 
-def check_user():
-    c.execute('''SELECT * FROM tanklogin WHERE EXISTS (SELECT username FROM tanklogin WHERE username = usern''')
+def check_user(user):
+    c.execute("SELECT password FROM tanklogin WHERE username = ?", (str(user),))
+    return c.fetchone()
+
+
+# def check_pswd(user, psswd):
+#     password_de = fernet.decrypt(psswd).decode()
+#     c.execute('''SELECT * FROM tanklogin WHERE EXISTS 
+#               (SELECT password FROM tanklogin WHERE 
+#               username = usern 
+#               AND password = password_de)''')
+    
 
 
 def show_table():

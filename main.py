@@ -29,6 +29,8 @@ def deletetable():
 conn = sqlite3.connect('test_database')
 c = conn.cursor()
 
+createtable()
+
 parameters = get_inputs()
 
 c.execute('INSERT INTO tanklogin (firstname, lastname, username, password) VALUES (?, ?, ?, ?)', parameters)
